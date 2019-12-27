@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.ws.rs.ApplicationPath;
@@ -27,7 +28,8 @@ import tw.com.msg.JsonMessage;
 @Produces(MediaType.APPLICATION_JSON)
 public class MyRestful {
 	@Inject
-	private EntityManager em;
+	@Named("customerJpa")
+	 private CustomerDAO customerDAO;
 	private final static  String tmpApiKey = "123456";
 	private static boolean checkApiKey(String apiKey) {
 		Optional<String> apiKeyOption = 
@@ -50,8 +52,6 @@ public class MyRestful {
 	Gson gson = new Gson();	
 	System.out.println("apikey:"+api_key);
 		if (checkApiKey(api_key)) {
-			
-		CustomerDAO customerDAO = new CustomerJapDao(em);
 		String json = gson.toJson(customerDAO.findAll());
 		return  gson.toJson(JsonMessage.getCustomerMessage(json));
 		}

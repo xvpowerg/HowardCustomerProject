@@ -45,7 +45,7 @@ public class MyRestful {
 //	private EntityManager em;
 //	@GET
 //	@Path("{customerid:\\d+}")
-	@POST
+	@GET
 	@Path("/customers")
 	public  String testId(@HeaderParam("apikey") String api_key) {
 		

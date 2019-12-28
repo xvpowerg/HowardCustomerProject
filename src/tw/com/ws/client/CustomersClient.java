@@ -19,14 +19,25 @@ public class CustomersClient {
 	public static  JsonMessage findAllCustomers() {
 		UriBuilder uri = UriBuilder.fromUri("http://localhost:8080/HowardCustomerProject/read/customers");
 		 Client client = ClientBuilder.newClient();
-		Response rsResponse = client.target(uri).request(MediaType.APPLICATION_JSON_TYPE).header("apikey", apikey)
-				.post(Entity.json(""));
-		String json = rsResponse.readEntity(String.class);
+		String json = client.target(uri).request(MediaType.APPLICATION_JSON_TYPE).header("apikey", apikey)
+				.get(String.class);
 		Gson gson = new Gson();
 		JsonMessage msg = gson.fromJson(json, 
 				JsonMessage.class);
 		return msg;
 	}
+
+//	public static  JsonMessage findAllCustomers() {
+//		UriBuilder uri = UriBuilder.fromUri("http://localhost:8080/HowardCustomerProject/read/customers");
+//		 Client client = ClientBuilder.newClient();
+//		Response rsResponse = client.target(uri).request(MediaType.APPLICATION_JSON_TYPE).header("apikey", apikey)
+//				.post(Entity.json(""));
+//		String json = rsResponse.readEntity(String.class);
+//		Gson gson = new Gson();
+//		JsonMessage msg = gson.fromJson(json, 
+//				JsonMessage.class);
+//		return msg;
+//	}
 
 	
 }
